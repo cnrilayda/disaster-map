@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dünya Afet Haritası · Deprem · Yangın · Fırtına</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- MarkerCluster -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css"/>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+
+  <!-- Chart.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <h1>🌍 Dünya Afet Haritası</h1>
+    <p class="muted">USGS (deprem) + NASA EONET (yangın, fırtına) · canlı veri</p>
+  </header>
+
+  <main class="layout">
+    <!-- Sol panel -->
+    <aside class="panel card">
+      <h2>Kontroller</h2>
+
+      <div class="control-group">
+        <h3>Katmanlar</h3>
+        <label class="switch">
+          <input type="checkbox" id="toggle-quakes" checked>
+          <span>Depremler</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="toggle-fires" checked>
+          <span>Yangınlar</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="toggle-storms" checked>
+          <span>Şiddetli Fırtınalar</span>
+        </label>
+      </div>
+
+      <div class="control-group">
+        <h3>Zaman Penceresi</h3>
+        <div class="chip-group" id="quake-range">
+          <button data-range="day" class="chip active">24s (deprem)</button>
+          <button data-range="week" class="chip">7g</button>
+          <button data-range="month" class="chip">30g</button>
+        </div>
+        <label>Yangın/Fırtına gün sayısı:
+          <select id="eonet-days">
+            <option value="7">7</option>
+            <option value="14">14</option>
+            <option value="30" selected>30</option>
+            <option value="60">60</option>
+          </select>
+        </label>
+        <button id="refresh" class="primary">Yenile</button>
+        <div id="status" class="status" aria-live="polite"></div>
+      </div>
+
+      <div class="legend control-group">
+        <h3>Lejant</h3>
+        <div><span class="dot dot-quake"></span> Deprem (renk: magnitüd)</div>
+        <div><span class="dot dot-fire"></span> Yangın</div>
+        <div><span class="dot dot-storm"></span> Fırtına</div>
+      </div>
+
+      <div class="card">
+        <h3>Deprem Magnitüd Dağılımı</h3>
+        <canvas id="magChart" height="180"></canvas>
+      </div>
+    </aside>
+
+    <!-- Harita -->
+    <section class="map-wrap card">
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small class="muted">
+      Veri kaynakları: USGS Earthquake GeoJSON & NASA EONET v3 (GeoJSON). Eğitim amaçlı.
+    </small>
+  </footer>
+</body>
+</html>

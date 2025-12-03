@@ -1,0 +1,61 @@
+:root{
+  --bg:#0f111a; --panel:#171924; --card:#131522; --text:#e8ecf1;
+  --muted:#a6b0c3; --border:#24283b; --accent:#8ab4ff; --ok:#68e3c7;
+  --warn:#ffd166; --danger:#ff6b6b; --storm:#64b5f6;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+  background:linear-gradient(180deg,#0c0f19,#0f1326);
+  color:var(--text);
+}
+
+.app-header{padding:18px 16px 6px; text-align:center}
+.app-header h1{margin:0 0 6px}
+.muted{color:var(--muted)}
+
+.layout{
+  max-width:1200px; margin:12px auto; padding:0 12px;
+  display:grid; grid-template-columns: 360px 1fr; gap:12px;
+}
+@media (max-width: 980px){
+  .layout{grid-template-columns: 1fr}
+}
+
+.card{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+.panel{padding:14px}
+.control-group{margin:12px 0; padding:10px; border:1px dashed var(--border); border-radius:10px}
+.legend{background:rgba(255,255,255,.02)}
+
+.switch{display:flex; align-items:center; gap:8px; margin:6px 0}
+.switch input{transform:scale(1.1)}
+
+.chip-group{display:flex; gap:8px; flex-wrap:wrap}
+.chip{
+  background:#12152a; color:var(--text); border:1px solid var(--border);
+  padding:8px 10px; border-radius:999px; cursor:pointer
+}
+.chip.active{outline:2px solid rgba(138,180,255,.35); border-color:var(--accent)}
+
+.primary{
+  display:inline-block; margin-top:8px;
+  background:var(--accent); color:#081022; border:0; border-radius:10px;
+  padding:10px 14px; font-weight:600; cursor:pointer;
+}
+.primary:hover{filter:brightness(1.1)}
+.status{margin-top:6px; font-size:.92rem; color:var(--muted); min-height:1.2em}
+
+.map-wrap{padding:6px}
+#map{width:100%; height:72vh; border-radius:10px}
+
+.dot{
+  display:inline-block; width:12px; height:12px; border-radius:50%;
+  margin-right:6px; vertical-align:middle; border:1px solid rgba(255,255,255,.35)
+}
+.dot-quake{background:linear-gradient(45deg,#ffd166,#ef476f)}
+.dot-fire{background:#ff6b6b}
+.dot-storm{background:#64b5f6}
